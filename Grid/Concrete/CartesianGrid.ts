@@ -1,7 +1,8 @@
-import { Line } from "../../Renderable/Concrete/Shapes/Line/Line";
+import { Line } from "../../Shapes/Line/Line";
 import { Point } from "../../Point/Point";
 import { IGrid } from "../Abstract/IGrid";
-export class CartesianGrid implements IGrid {
+import { IRenderable } from "../../Renderable/Abstract/IRenderable";
+export class CartesianGrid implements IGrid, IRenderable {
   private cellSize: number;
   private width: number;
   private height: number;
