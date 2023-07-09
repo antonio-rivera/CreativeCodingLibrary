@@ -15,41 +15,43 @@ export class Point {
     return this.position;
   }
 
-  public Add(point2: Point): void {
+  public Add(point2: Point): Point {
     const [x2, y2] = point2.position;
 
     const [x1, y1] = this.position;
 
-    this.position[0] = x1 + x2;
-    this.position[1] = y1 + y2;
+    return new Point(x1 + x2, y1 + y2);
   }
 
   public AddToX(x: number) {
-    this.position[0] += x;
+    const [x1, y1] = this.position;
+    return new Point(x1 + x, y1);
   }
 
   public AddToY(y: number) {
-    this.position[1] += y;
+    const [x1, y1] = this.position;
+    return new Point(x1, y1 + y);
   }
 
   public SubFromX(x: number) {
-    this.position[0] -= x;
+    const [x1, y1] = this.position;
+    return new Point(x1 - x, y1);
   }
 
   public SubFromY(y: number) {
-    this.position[1] -= y;
+    const [x1, y1] = this.position;
+    return new Point(x1, y1 - y);
   }
 
-  public Substract(point2: Point): void {
+  public Substract(point2: Point): Point {
     const [x2, y2] = point2.position;
 
     const [x1, y1] = this.position;
 
-    this.position[0] = x1 - x2;
-    this.position[1] = y1 - y2;
+    return new Point(x2 - x1, y2 - y1);
   }
 
-  public MidPoint(point2: Point, onlyX = false, onlyY = false): void {
+  public MidPoint(point2: Point, onlyX = false, onlyY = false): Point {
     const [x2, y2] = point2.position;
 
     const [x1, y1] = this.position;
@@ -58,19 +60,46 @@ export class Point {
     const midy = (y1 + y2) / 2;
 
     if (onlyX) {
-      this.position[0] = midx;
-      return;
+      return new Point(midx, y1);
     } else if (onlyY) {
-      this.position[1] = midy;
-      return;
+      return new Point(x1, midy);
     }
 
-    this.position[0] = midx;
-    this.position[1] = midy;
+    return new Point(midx, midy);
   }
 
-  public ScaleUp(scalar: number): void {
-    this.position[0] *= scalar;
-    this.position[1] *= scalar;
+  public ScaleUp(scalar: number): Point {
+    const [x, y] = this.position;
+    return new Point(x * scalar, y * scalar);
+  }
+
+  public ScaleDown(scalar: number): Point {
+    const [x, y] = this.position;
+    try {
+      return new Point(x / scalar, y / scalar);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(
+          `Exception caught, incorrect scalar ${scalar}, possible division by zero. \n Error: ${error.message}`
+        );
+      }
+    }
+  }
+
+  public Distance(point: Point): number {
+    const [x1, y1] = this.position;
+    const [x2, y2] = point.position;
+
+    const d1 = x2 - x1;
+    const d2 = y2 - y1;
+
+    const distance = Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2));
+    return distance;
+  }
+
+  public ToThePower(exponent: number): Point {
+    const [x, y] = this.position;
+
+    return new Point(Math.pow(x, exponent), Math.pow(y, exponent));
   }
 }
