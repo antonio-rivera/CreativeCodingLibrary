@@ -1,5 +1,5 @@
-import { Point } from "../../../../Point/Point";
-import { IRenderable } from "../../../Abstract/IRenderable";
+import { Point } from "../../Point/Point";
+import { IRenderable } from "../../Renderable/Abstract/IRenderable";
 export class Line implements IRenderable {
   // private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
