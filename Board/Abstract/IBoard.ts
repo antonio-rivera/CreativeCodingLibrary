@@ -1,10 +1,10 @@
 import { Point } from "../../Point/Point";
-import { IRenderable } from "../../Renderable/Abstract/IRenderable";
+import { IRenderableMovable } from "../../Renderable/Abstract/IRenderable";
 import { Vector } from "../../Vector/Vector";
 
-interface IBoard {
-  Initialize(): void;
+export interface IBoard {
   GetXLength(): number;
   GetYLength(): number;
-  GetItem(position: Vector | Point): IRenderable;
+  GetItem(position: Vector | Point): IRenderableMovable | undefined;
+  SetItem(item: IRenderableMovable): void;
 }
