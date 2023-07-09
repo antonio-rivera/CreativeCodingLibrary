@@ -1,4 +1,4 @@
-import { Line } from "../../Shapes/Line/Line";
+import { Line } from "../../Renderable/Concrete/Shapes/Line/Line";
 import { Point } from "../../Point/Point";
 import { IGrid } from "../Abstract/IGrid";
 export class CartesianGrid implements IGrid {
