@@ -14,10 +14,17 @@ export class Vector {
     return Math.sqrt(xSquared + ySquared);
   }
 
-  public Normalize(): Vector {
+  public Normalize(): Vector | undefined {
     const magnitude = this.Magnitude();
-    const normalPoint: Point = this.point.ScaleDown(magnitude);
+    const normalPoint: Point | undefined = this.point.ScaleDown(magnitude);
+    if (normalPoint) {
+      return new Vector(normalPoint);
+    }
 
-    return new Vector(normalPoint);
+    return undefined;
+  }
+
+  public ToString(): string {
+    return this.point.ToString();
   }
 }

@@ -73,7 +73,7 @@ export class Point {
     return new Point(x * scalar, y * scalar);
   }
 
-  public ScaleDown(scalar: number): Point {
+  public ScaleDown(scalar: number): Point | undefined {
     const [x, y] = this.position;
     try {
       return new Point(x / scalar, y / scalar);
@@ -82,6 +82,7 @@ export class Point {
         console.log(
           `Exception caught, incorrect scalar ${scalar}, possible division by zero. \n Error: ${error.message}`
         );
+        return undefined;
       }
     }
   }
@@ -101,5 +102,9 @@ export class Point {
     const [x, y] = this.position;
 
     return new Point(Math.pow(x, exponent), Math.pow(y, exponent));
+  }
+
+  public ToString(): string {
+    return JSON.stringify(this.position);
   }
 }
