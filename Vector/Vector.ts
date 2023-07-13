@@ -1,10 +1,20 @@
+import { IGrid } from "../Grid/Abstract/IGrid";
 import { Point } from "../Point/Point";
 
 export class Vector {
   public point: Point;
 
-  constructor(point: Point) {
-    this.point = point;
+  constructor(x: number, y: number) {
+    this.point = new Point(x, y);
+  }
+
+  public static fromPoint(point: Point): Vector {
+    const [x, y] = point.GetPos();
+    return new this(x, y);
+  }
+
+  public GetPosition(): [x: number, y: number] {
+    return this.point.GetPos();
   }
 
   public Magnitude(): number {
@@ -18,10 +28,24 @@ export class Vector {
     const magnitude = this.Magnitude();
     const normalPoint: Point | undefined = this.point.ScaleDown(magnitude);
     if (normalPoint) {
-      return new Vector(normalPoint);
+      return Vector.fromPoint(normalPoint);
     }
 
     return undefined;
+  }
+
+  translateToDraw(grid: IGrid): [x: number, y: number] {
+    const [x, y] = this.ScaleToGrid(grid).GetPosition();
+
+    const origin = new Point(grid.GetWidth() / 2, grid.GetHeight() / 2);
+
+    const fromOrigin = Vector.fromPoint(origin.AddToX(x).SubFromY(y));
+
+    return fromOrigin.GetPosition();
+  }
+
+  ScaleToGrid(grid: IGrid): Vector {
+    return Vector.fromPoint(this.point.ScaleUp(grid.GetCellSize()));
   }
 
   public ToString(): string {
