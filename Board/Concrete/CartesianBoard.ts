@@ -11,8 +11,8 @@ export class CartesianBoard implements IBoard {
 
   constructor(grid: CartesianGrid) {
     this.values = new Map<string, IRenderableMovable>();
-    this.xLength = grid.GetWidth();
-    this.yLength = grid.GetHeight();
+    this.xLength = grid.GetWidth() / grid.GetCellSize() / 2;
+    this.yLength = grid.GetHeight() / grid.GetCellSize() / 2;
   }
 
   GetXLength(): number {
@@ -24,8 +24,8 @@ export class CartesianBoard implements IBoard {
   }
 
   GetItem(position: Vector | Point): IRenderableMovable | undefined {
-    if (this.values.has(position.toString())) {
-      return this.values.get(position.toString());
+    if (this.values.has(position.ToString())) {
+      return this.values.get(position.ToString());
     }
 
     return undefined;
@@ -34,12 +34,16 @@ export class CartesianBoard implements IBoard {
   SetItem(item: IRenderableMovable): void {
     const [x, y] = item.GetPos().point.GetPos();
     if (x < -this.xLength || x > this.xLength) {
-      console.error(`x coordinate ${x} out of grid range`);
+      console.error(
+        `x coordinate ${x} is out of grid range ${this.xLength} x ${this.yLength} relative to origin (0,0)`
+      );
       return;
     }
 
     if (y < -this.yLength || y > this.yLength) {
-      console.error(`y coordinate ${y} out of grid range`);
+      console.error(
+        `y coordinate ${y} is out of grid range ${this.xLength} x ${this.yLength}  relative to origin (0,0)`
+      );
       return;
     }
 
