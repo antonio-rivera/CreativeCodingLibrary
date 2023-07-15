@@ -6,5 +6,5 @@ export interface IBoard {
   GetXLength(): number;
   GetYLength(): number;
   GetItem(position: Vector | Point): IRenderableMovable | undefined;
-  SetItem(item: IRenderableMovable): void;
+  SetItem(item: IRenderableMovable): boolean;
 }
