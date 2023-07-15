@@ -11,7 +11,7 @@ export interface IMoveable {
 }
 
 export interface IRenderableMovable {
-  GetCurrentGrid(): IGrid;
+  // SetPos(position: Vector): void;
   Draw(): void;
   GetPos(): Vector;
 }
