@@ -2,11 +2,11 @@ import { IGrid } from "../../Grid/Abstract/IGrid";
 import { IRenderableMovable } from "../../Renderable/Abstract/IRenderable";
 import { Vector } from "../../Vector/Vector";
 export class Circle implements IRenderableMovable {
-  private ctx: CanvasRenderingContext2D;
-  private radius: number;
-  private position: Vector;
-  private color: string;
-  private grid: IGrid;
+  protected ctx: CanvasRenderingContext2D;
+  protected radius: number;
+  protected position: Vector;
+  protected color: string;
+  protected grid: IGrid;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -23,10 +23,11 @@ export class Circle implements IRenderableMovable {
   }
 
   Draw(): void {
-    const [x, y] = this.position.translateToDraw(this.grid);
+    const [x, y] = this.grid.TranslateToDraw(this.position);
     this.ctx.beginPath();
+    const scaledRad = this.grid.ScaleToGrid(this.radius);
 
-    this.ctx.arc(x, y, this.radius, 0, 2 * Math.PI);
+    this.ctx.arc(x, y, scaledRad, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.color;
     this.ctx.fill();
   }
@@ -38,4 +39,12 @@ export class Circle implements IRenderableMovable {
   GetPos(): Vector {
     return this.position;
   }
+
+  GetRadius(): number {
+    return this.radius;
+  }
+
+  // private ScaleRadiusToGrid() {
+  //   return this.radius * this.grid.GetCellSize();
+  // }
 }
