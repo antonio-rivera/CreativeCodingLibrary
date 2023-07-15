@@ -3,7 +3,7 @@ import { Vector } from "../../Vector/Vector";
 
 export interface IGrid {
   Draw(): void;
-  GetOrigin(): Point;
+  GetCanvasOrigin(): Point;
   GetWidth(): number;
   GetHeight(): number;
   GetCellSize(): number;
