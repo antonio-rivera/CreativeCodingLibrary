@@ -4,7 +4,7 @@ import { Vector } from "../../Vector/Vector";
 export class Circle implements IRenderableMovable {
   protected ctx: CanvasRenderingContext2D;
   protected radius: number;
-  protected position: Vector;
+  public position: Vector;
   protected color: string;
   protected grid: IGrid;
 
@@ -32,10 +32,6 @@ export class Circle implements IRenderableMovable {
     this.ctx.fill();
   }
 
-  GetCurrentGrid(): IGrid {
-    return this.grid;
-  }
-
   GetPos(): Vector {
     return this.position;
   }
@@ -43,8 +39,4 @@ export class Circle implements IRenderableMovable {
   GetRadius(): number {
     return this.radius;
   }
-
-  // private ScaleRadiusToGrid() {
-  //   return this.radius * this.grid.GetCellSize();
-  // }
 }
