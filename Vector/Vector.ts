@@ -23,6 +23,14 @@ export class Vector {
     return Math.sqrt(xSquared + ySquared);
   }
 
+  public Dot(vec2: Vector): number {
+    const [x1, y1] = this.GetPosition();
+    const [x2, y2] = vec2.GetPosition();
+
+    const prod = x1 * x2 + y1 * y2;
+    return prod;
+  }
+
   public Normalize(): Vector | undefined {
     const magnitude = this.Magnitude();
     const normalPoint: Point | undefined = this.point.ScaleDown(magnitude);
