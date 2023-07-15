@@ -8,6 +8,7 @@ export class CartesianGrid implements IGrid, IRenderable {
   private width: number;
   private height: number;
   private ctx: CanvasRenderingContext2D;
+  public origin: Vector;
   constructor(
     cellSize: number,
     width: number,
@@ -22,6 +23,8 @@ export class CartesianGrid implements IGrid, IRenderable {
 
     this.height = height - heightOffset;
     this.width = width - widthOffset;
+
+    this.origin = new Vector(0, 0);
   }
   // End constructor
 
@@ -68,14 +71,14 @@ export class CartesianGrid implements IGrid, IRenderable {
     return this.cellSize;
   }
 
-  GetOrigin(): Point {
+  GetCanvasOrigin(): Point {
     return new Point(this.width / 2, this.height / 2);
   }
 
   TranslateToDraw(position: Vector): [x: number, y: number] {
     const [x, y] = this.ScaleVecToGrid(position).GetPosition();
 
-    const origin = this.GetOrigin();
+    const origin = this.GetCanvasOrigin();
 
     const fromOrigin = Vector.fromPoint(origin.AddToX(x).SubFromY(y));
 
