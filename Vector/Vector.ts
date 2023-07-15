@@ -1,4 +1,3 @@
-import { IGrid } from "../Grid/Abstract/IGrid";
 import { Point } from "../Point/Point";
 
 export class Vector {
@@ -34,18 +33,8 @@ export class Vector {
     return undefined;
   }
 
-  translateToDraw(grid: IGrid): [x: number, y: number] {
-    const [x, y] = this.ScaleToGrid(grid).GetPosition();
-
-    const origin = new Point(grid.GetWidth() / 2, grid.GetHeight() / 2);
-
-    const fromOrigin = Vector.fromPoint(origin.AddToX(x).SubFromY(y));
-
-    return fromOrigin.GetPosition();
-  }
-
-  ScaleToGrid(grid: IGrid): Vector {
-    return Vector.fromPoint(this.point.ScaleUp(grid.GetCellSize()));
+  public Scale(scalar: number): Vector {
+    return Vector.fromPoint(this.point.ScaleUp(scalar));
   }
 
   public ToString(): string {
