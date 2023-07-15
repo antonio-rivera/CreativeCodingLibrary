@@ -2,6 +2,7 @@ import { Line } from "../../Shapes/Line/Line";
 import { Point } from "../../Point/Point";
 import { IGrid } from "../Abstract/IGrid";
 import { IRenderable } from "../../Renderable/Abstract/IRenderable";
+import { Vector } from "../../Vector/Vector";
 export class CartesianGrid implements IGrid, IRenderable {
   private cellSize: number;
   private width: number;
@@ -65,5 +66,27 @@ export class CartesianGrid implements IGrid, IRenderable {
 
   GetCellSize() {
     return this.cellSize;
+  }
+
+  GetOrigin(): Point {
+    return new Point(this.width / 2, this.height / 2);
+  }
+
+  TranslateToDraw(position: Vector): [x: number, y: number] {
+    const [x, y] = this.ScaleVecToGrid(position).GetPosition();
+
+    const origin = this.GetOrigin();
+
+    const fromOrigin = Vector.fromPoint(origin.AddToX(x).SubFromY(y));
+
+    return fromOrigin.GetPosition();
+  }
+
+  ScaleVecToGrid(vec: Vector): Vector {
+    return vec.Scale(this.cellSize);
+  }
+
+  ScaleToGrid(pixels: number): number {
+    return pixels * this.cellSize;
   }
 }
