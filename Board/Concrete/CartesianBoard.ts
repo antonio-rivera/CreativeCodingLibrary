@@ -31,22 +31,23 @@ export class CartesianBoard implements IBoard {
     return undefined;
   }
 
-  SetItem(item: IRenderableMovable): void {
+  SetItem(item: IRenderableMovable): boolean {
     const [x, y] = item.GetPos().point.GetPos();
     if (x < -this.xLength || x > this.xLength) {
       console.error(
         `x coordinate ${x} is out of grid range ${this.xLength} x ${this.yLength} relative to origin (0,0)`
       );
-      return;
+      return false;
     }
 
     if (y < -this.yLength || y > this.yLength) {
       console.error(
         `y coordinate ${y} is out of grid range ${this.xLength} x ${this.yLength}  relative to origin (0,0)`
       );
-      return;
+      return false;
     }
 
     this.values.set(item.GetPos().ToString(), item);
+    return true;
   }
 }
