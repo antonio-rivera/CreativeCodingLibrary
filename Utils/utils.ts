@@ -8,8 +8,8 @@ export function DrawVector(
   y: number,
   color: string
 ): [tip: Circle, line: VectorLine] {
-  const point = new Circle(ctx, 0.2, new Vector(x, y), color, grid);
-  const line = new VectorLine(ctx, grid.origin, point.position, grid);
+  const point = new Circle(0.2, new Vector(x, y), color);
+  const line = new VectorLine(grid.origin, point.position);
 
   point.Draw();
   line.Draw();

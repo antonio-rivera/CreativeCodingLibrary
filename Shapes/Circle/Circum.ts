@@ -1,24 +1,19 @@
 import { IGrid } from "../../Grid/Abstract/IGrid";
 import { Vector } from "../../Vector/Vector";
 import { Circle } from "./Circle";
+import { ctx, grid } from "../../Shared/init";
 
 export class Circum extends Circle {
-  constructor(
-    ctx: CanvasRenderingContext2D,
-    radius: number,
-    position: Vector,
-    color: string,
-    grid: IGrid
-  ) {
-    super(ctx, radius, position, color, grid);
+  constructor(radius: number, position: Vector, color: string) {
+    super(radius, position, color);
   }
   override Draw(): void {
-    const [x, y] = this.grid.TranslateToDraw(this.position);
-    this.ctx.beginPath();
-    const scaledRad = this.grid.ScaleToGrid(this.radius);
+    const [x, y] = grid.TranslateToDraw(this.position);
+    ctx.beginPath();
+    const scaledRad = grid.ScaleToGrid(this.radius);
 
-    this.ctx.arc(x, y, scaledRad, 0, 2 * Math.PI);
-    this.ctx.strokeStyle = this.color;
-    this.ctx.stroke();
+    ctx.arc(x, y, scaledRad, 0, 2 * Math.PI);
+    ctx.strokeStyle = this.color;
+    ctx.stroke();
   }
 }

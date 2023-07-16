@@ -1,15 +1,15 @@
-import { CartesianGrid } from "../../Grid/Concrete/CartesianGrid";
 import { Point } from "../../Point/Point";
 import { IRenderableMovable } from "../../Renderable/Abstract/IRenderable";
 import { Vector } from "../../Vector/Vector";
 import { IBoard } from "../Abstract/IBoard";
+import { grid } from "../../Shared/init";
 
 export class CartesianBoard implements IBoard {
   private values: Map<string, IRenderableMovable>;
   private xLength: number;
   private yLength: number;
 
-  constructor(grid: CartesianGrid) {
+  constructor() {
     this.values = new Map<string, IRenderableMovable>();
     this.xLength = grid.GetWidth() / grid.GetCellSize() / 2;
     this.yLength = grid.GetHeight() / grid.GetCellSize() / 2;

@@ -7,16 +7,9 @@ export class CartesianGrid implements IGrid, IRenderable {
   private cellSize: number;
   private width: number;
   private height: number;
-  private ctx: CanvasRenderingContext2D;
   public origin: Vector;
-  constructor(
-    cellSize: number,
-    width: number,
-    height: number,
-    ctx: CanvasRenderingContext2D
-  ) {
+  constructor(cellSize: number, width: number, height: number) {
     this.cellSize = cellSize;
-    this.ctx = ctx;
     //Adjust grid borders to avoid cutoffs
     const heightOffset = height % cellSize;
     const widthOffset = width % cellSize;
@@ -38,7 +31,7 @@ export class CartesianGrid implements IGrid, IRenderable {
       const start = new Point(0, i);
       const end = new Point(this.width, i);
 
-      const line = new Line(this.ctx, start, end);
+      const line = new Line(start, end);
       line.Draw();
       totalHeight += this.cellSize;
     }
@@ -53,7 +46,7 @@ export class CartesianGrid implements IGrid, IRenderable {
       const start = new Point(i, 0);
       const end = new Point(i, this.height);
 
-      const line = new Line(this.ctx, start, end);
+      const line = new Line(start, end);
       line.Draw();
       totalWidth += this.cellSize;
     }
