@@ -16,6 +16,16 @@ export class Vector {
     return this.point.GetPos();
   }
 
+  public Add(v2: Vector): Vector {
+    const v3 = this.point.Add(v2.point);
+    return Vector.fromPoint(v3);
+  }
+
+  public Sub(v2: Vector): Vector {
+    const v3 = this.point.Substract(v2.point);
+    return Vector.fromPoint(v3);
+  }
+
   public Magnitude(): number {
     const pointSquared: Point = this.point.ToThePower(2);
     const [xSquared, ySquared] = pointSquared.GetPos();
