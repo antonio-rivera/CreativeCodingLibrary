@@ -12,6 +12,11 @@ export class Vector {
     return new this(x, y);
   }
 
+  public Assign(v2: Vector) {
+    const [x, y] = v2.point.GetPos();
+    this.point = new Point(x, y);
+  }
+
   public GetPosition(): [x: number, y: number] {
     return this.point.GetPos();
   }
