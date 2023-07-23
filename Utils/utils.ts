@@ -1,7 +1,7 @@
 import { Circle } from "../../Library/Shapes/Circle/Circle";
 import { Vector } from "../../Library/Vector/Vector";
 import { VectorLine } from "../../Library/Shapes/Line/VectorLine";
-import { ctx, grid } from "../../Library/Shared/init";
+import { grid } from "../../Library/Shared/init";
 
 export function DrawWorldPointVector(
   x: number,
@@ -9,7 +9,7 @@ export function DrawWorldPointVector(
   color: string
 ): [tip: Circle, line: VectorLine] {
   const point = new Circle(0.2, new Vector(x, y), color);
-  const line = new VectorLine(grid.origin, point.position);
+  const line = new VectorLine(grid.origin, point.GetPos());
 
   point.Draw();
   line.Draw();
@@ -25,7 +25,7 @@ export function DrawPointVector(
   color: string
 ): [tip: Circle, line: VectorLine] {
   const point = new Circle(0.2, new Vector(x2, y2), color);
-  const line = new VectorLine(new Vector(x1, y1), point.position);
+  const line = new VectorLine(new Vector(x1, y1), point.GetPos());
 
   point.Draw();
   line.Draw();
@@ -39,7 +39,7 @@ export function DrawVectorLine(
   color: string
 ): [tip: Circle, line: VectorLine] {
   const point = new Circle(0.2, v2, color);
-  const line = new VectorLine(v1, point.position);
+  const line = new VectorLine(v1, point.GetPos());
 
   point.Draw();
   line.Draw();
@@ -52,7 +52,7 @@ export function DrawWorldVector(
   color: string
 ): [tip: Circle, line: VectorLine] {
   const point = new Circle(0.2, v1, color);
-  const line = new VectorLine(grid.origin, point.position);
+  const line = new VectorLine(grid.origin, point.GetPos());
 
   point.Draw();
   line.Draw();
