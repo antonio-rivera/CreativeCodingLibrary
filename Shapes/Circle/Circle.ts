@@ -1,20 +1,19 @@
-import { IGrid } from "../../Grid/Abstract/IGrid";
 import { IRenderableMovable } from "../../Renderable/Abstract/IRenderable";
 import { Vector } from "../../Vector/Vector";
 import { ctx, grid } from "../../Shared/init";
-export class Circle implements IRenderableMovable {
+import { VerletObject } from "../../Animation/VerletObject";
+export class Circle extends VerletObject implements IRenderableMovable {
   protected radius: number;
-  public position: Vector;
   protected color: string;
 
   constructor(radius: number, position: Vector, color: string) {
+    super(position);
     this.radius = radius;
-    this.position = position;
     this.color = color;
   }
 
   Draw(): void {
-    const [x, y] = grid.TranslateToDraw(this.position);
+    const [x, y] = grid.TranslateToDraw(this.current_pos);
     ctx.beginPath();
     const scaledRad = grid.ScaleToGrid(this.radius);
 
@@ -24,7 +23,7 @@ export class Circle implements IRenderableMovable {
   }
 
   GetPos(): Vector {
-    return this.position;
+    return this.current_pos;
   }
 
   GetRadius(): number {
