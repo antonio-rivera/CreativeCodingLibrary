@@ -48,7 +48,7 @@ export class Point {
 
     const [x1, y1] = this.position;
 
-    return new Point(x2 - x1, y2 - y1);
+    return new Point(x1 - x2, y1 - y2);
   }
 
   public MidPoint(point2: Point, onlyX = false, onlyY = false): Point {
