@@ -16,7 +16,7 @@ export abstract class VerletObject {
     this.old_pos = Vector.fromPoint(this.current_pos.point);
     this.current_pos = this.current_pos
       .Add(velocity)
-      .Add(this.acceleration.Scale(dt * dt));
+      .Add(this.acceleration.Scale(dt * dt).Scale(deltaTimeMultiplier));
 
     this.acceleration = new Vector(0, 0);
   }
