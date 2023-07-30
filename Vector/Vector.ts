@@ -2,9 +2,13 @@ import { Point } from "../Point/Point";
 
 export class Vector {
   public point: Point;
+  public x: number;
+  public y: number;
 
   constructor(x: number, y: number) {
     this.point = new Point(x, y);
+    this.x = x;
+    this.y = y;
   }
 
   public static fromPoint(point: Point): Vector {
@@ -58,6 +62,13 @@ export class Vector {
 
   public Scale(scalar: number): Vector {
     return Vector.fromPoint(this.point.ScaleUp(scalar));
+  }
+
+  public ScaleByVector(vec: Vector): Vector {
+    const [x1, y1] = this.GetPosition();
+    const [x2, y2] = vec.GetPosition();
+
+    return new Vector(x1 * x2, y1 * y2);
   }
 
   public ToString(): string {
