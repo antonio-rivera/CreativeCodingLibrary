@@ -9,7 +9,7 @@ export interface IMoveable {
 }
 
 export interface IRenderableMovable {
-  // SetPos(position: Vector): void;
+  SetPos(position: Vector): void;
   Draw(): void;
   GetPos(): Vector;
 }
