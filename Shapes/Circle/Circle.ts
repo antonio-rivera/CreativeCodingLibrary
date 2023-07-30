@@ -29,4 +29,8 @@ export class Circle extends VerletObject implements IRenderableMovable {
   GetRadius(): number {
     return this.radius;
   }
+
+  SetPos(position: Vector): void {
+    this.current_pos = Vector.fromPoint(position.point);
+  }
 }
