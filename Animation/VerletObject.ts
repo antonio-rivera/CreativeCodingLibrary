@@ -2,7 +2,7 @@ import { Vector } from "../Vector/Vector";
 export abstract class VerletObject {
   protected current_pos: Vector = new Vector(0, 0);
   protected old_pos: Vector = new Vector(0, 0);
-  protected acceleration?: Vector;
+  protected acceleration: Vector;
 
   constructor(c_pos: Vector) {
     this.acceleration = new Vector(0, 0);
