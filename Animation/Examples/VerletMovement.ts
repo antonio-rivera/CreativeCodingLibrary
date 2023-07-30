@@ -1,7 +1,7 @@
 import "./file.css";
-import { ctx, canvas } from "../../Library/Shared/init";
-import { Circle } from "../../Library/Shapes/Circle/Circle";
-import { Vector } from "../../Library/Vector/Vector";
+import { ctx, canvas } from "../../Shared/init";
+import { Circle } from "../../Shapes/Circle/Circle";
+import { Vector } from "../../Vector/Vector";
 
 const points: Circle[] = [];
 
